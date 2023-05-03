@@ -37,19 +37,20 @@
               <h4 class="mb-2">Welcome to Sneat! 👋</h4>
               <p class="mb-4">Please sign-in to your account and start the adventure</p>
 
-              <form id="formAuthentication" class="mb-3" action=" " method="POST">
-
+              <form id="formAuthentication" class="mb-3" action="{{ route('login') }} " method="POST">
+                @csrf
                  <!-- Email Address -->
                 <div class="mb-3">
-                  <label for="email" class="form-label">Email or Username</label>
+                  <label for="email" class="form-label">Email </label>
                   <input
                     type="text"
                     class="form-control"
                     id="email"
                     name="email"
-                    placeholder="Enter your email or username"
-                    autofocus  />
+                    placeholder="Enter your email "
+                    autofocus  :value="old('email')"/>
                 </div>
+                <x-input-error :messages="$errors->get('email')" class="mt-2" />
                 <!-- Password -->
                 <div class="mb-3 form-password-toggle">
                   <div class="d-flex justify-content-between">
@@ -58,6 +59,9 @@
                       <small>Forgot Password?</small>
                     </a>
                   </div>
+                  <x-input-error :messages="$errors->get('password')" class="mt-2" />
+
+                    
                   <div class="input-group input-group-merge">
                     <input
                       type="password"
