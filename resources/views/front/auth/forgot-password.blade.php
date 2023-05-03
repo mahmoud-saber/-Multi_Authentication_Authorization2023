@@ -1,19 +1,8 @@
-@section('title','Front Forgot Password ')
+@section('title', 'Front Forgot Password ')
 
 <!DOCTYPE html>
 
-<!-- =========================================================
-* Sneat - Bootstrap 5 HTML Admin Template - Pro | v1.0.0
-==============================================================
-
-* Product Page: https://themeselection.com/products/sneat-bootstrap-html-admin-template/
-* Created by: ThemeSelection
-* License: You must have a valid license purchased in order to legally use the theme for your project.
-* Copyright ThemeSelection (https://themeselection.com)
-
-=========================================================
- -->
-<!-- beautify ignore:start -->
+@section('title','Front Forget-Password')
 <html
   lang="en"
   class="light-style customizer-hide"
@@ -21,7 +10,7 @@
   data-theme="theme-default"
   data-assets-path="../assets/"
   data-template="vertical-menu-template-free">
-@include('front.auth.authHead')
+@include('front.partials.authHead')
 
   <body>
     <!-- Content -->
@@ -33,12 +22,15 @@
           <div class="card">
             <div class="card-body">
               <!-- Logo -->
-             @include('front.auth.authLogo')
+             @include('front.partials.authLogo')
 
               <!-- /Logo -->
               <h4 class="mb-2">Forgot Password? 🔒</h4>
               <p class="mb-4">Enter your email and we'll send you instructions to reset your password</p>
-              <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
+               <!-- Session Status -->
+                <x-auth-session-status class="mb-4" :status="session('status')" />
+              <form id="formAuthentication" class="mb-3" action="{{ route('password.email') }}" method="POST">
+                @csrf
                 <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
                   <input
@@ -48,12 +40,13 @@
                     name="email"
                     placeholder="Enter your email"
                     autofocus
+                    :value="old('email')"
                   />
                 </div>
                 <button class="btn btn-primary d-grid w-100">Send Reset Link</button>
               </form>
               <div class="text-center">
-                <a href="auth-login-basic.html" class="d-flex align-items-center justify-content-center">
+                <a href="{{ route('login') }}" class="d-flex align-items-center justify-content-center">
                   <i class="bx bx-chevron-left scaleX-n1-rtl bx-sm"></i>
                   Back to login
                 </a>
@@ -67,18 +60,11 @@
 
     <!-- / Content -->
 
-    <div class="buy-now">
-      <a
-        href="https://themeselection.com/products/sneat-bootstrap-html-admin-template/"
-        target="_blank"
-        class="btn btn-danger btn-buy-now"
-        >Upgrade to Pro</a
-      >
-    </div>
+
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
-    @include('front.auth.authScripts')
+    @include('front.partials.authScripts')
 
   </body>
 </html>

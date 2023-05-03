@@ -1,5 +1,3 @@
-@section('title','Front Register')
-
 <!DOCTYPE html>
 
 <!-- =========================================================
@@ -21,8 +19,7 @@
   data-theme="theme-default"
   data-assets-path="../assets/"
   data-template="vertical-menu-template-free">
-@include('front.auth.authHead')
-
+   @include('front.partials.authHead')
   <body>
     <!-- Content -->
 
@@ -33,55 +30,54 @@
           <div class="card">
             <div class="card-body">
               <!-- Logo -->
-             @include('front.auth.authLogo')
+          @include('front.partials.authLogo')
               <!-- /Logo -->
               <h4 class="mb-2">Adventure starts here 🚀</h4>
               <p class="mb-4">Make your app management easy and fun!</p>
 
               <form id="formAuthentication" class="mb-3" action="{{ route('register') }}" method="POST">
                 @csrf
-                {{-- Name --}}
+
                 <div class="mb-3">
-                  <label for="name" class="form-label">Name</label>
+                  <label for="Name" class="form-label">Name</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="name"
+                    id="Name"
                     name="name"
-                    placeholder="Enter your name"
+                    placeholder="Enter your Name"
                     autofocus
                     :value="old('name')"
                   />
                   <x-input-error :messages="$errors->get('name')" class="mt-2" />
+
                 </div>
-                {{-- Email --}}
                 <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
-                  <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email"
-                  :value="old('email')"/>
-                  <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                  <input type="text" class="form-control" id="email" name="email"  :value="old('email')" placeholder="Enter your email" />
+                  <x-input-error :messages="$errors->get('email')" class="mt-2" />
                 </div>
 
-                {{-- Password --}}
                 <div class="mb-3 form-password-toggle">
-                    <label class="form-label" for="password">Password</label>
-                    <div class="input-group input-group-merge">
-                      <input
-                        type="password"
-                        id="password"
-                        class="form-control"
-                        name="password"
-                        placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                        aria-describedby="password"
-                      />
-                      <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                    </div>
-                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                  <label class="form-label" for="password">Password</label>
+                  <div class="input-group input-group-merge">
+                    <input
+                      type="password"
+                      id="password"
+                      class="form-control"
+                      name="password"
+                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                      aria-describedby="password"
+                    />
+                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                   </div>
+                  <x-input-error :messages="$errors->get('password')" class="mt-2" />
 
-                   {{-- Confirm Password --}}
-                   <div class="mb-3 form-password-toggle">
-                    <label class="form-label" for="password">Password_Confirmation</label>
+                </div>
+
+
+                <div class="mb-3 form-password-toggle">
+                    <label class="form-label" for="password">password_confirmation</label>
                     <div class="input-group input-group-merge">
                       <input
                         type="password"
@@ -90,12 +86,12 @@
                         name="password_confirmation"
                         placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                         aria-describedby="password"
+                        :value="__('Confirm Password')"
                       />
                       <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                     </div>
                     <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                   </div>
-
                 {{-- <div class="mb-3">
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms" />
@@ -110,7 +106,7 @@
 
               <p class="text-center">
                 <span>Already have an account?</span>
-                <a href="{{ route("login") }}">
+                <a href="{{ route('login') }}">
                   <span>Sign in instead</span>
                 </a>
               </p>
@@ -124,9 +120,8 @@
     <!-- / Content -->
 
 
-
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
-@include('front.auth.authScripts')
+  @include('front.partials.authScripts')
   </body>
 </html>
