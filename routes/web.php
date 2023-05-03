@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// front desigin
+// front design
 Route::prefix('front')->name('front.')->group(function(){
     Route::get('/',FrontHomeController::class)->name('index');
 });
