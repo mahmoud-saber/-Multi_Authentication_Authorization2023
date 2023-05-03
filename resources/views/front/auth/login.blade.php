@@ -1,4 +1,4 @@
-@section('title','Front Login Page')
+@section('title', 'Front Login Page')
 
 <!DOCTYPE html>
 
@@ -19,7 +19,7 @@
   class="light-style customizer-hide"
   dir="ltr"
   data-theme="theme-default"
-  data-assets-path="{{asset('front-assets')}}/"
+  data-assets-path="{{ asset('front-assets') }}/"
   data-template="vertical-menu-template-free">
   @include('front.auth.authHead')
   <body>
@@ -36,10 +36,12 @@
               <!-- /Logo -->
               <h4 class="mb-2">Welcome to Sneat! 👋</h4>
               <p class="mb-4">Please sign-in to your account and start the adventure</p>
+           <!-- Session Status -->
+             <x-auth-session-status class="mb-4" :status="session('status')" />
 
-              <form id="formAuthentication" class="mb-3" action="{{ route('login') }} " method="POST">
+             <form id="formAuthentication" class="mb-3" action="{{route('login')}}" method="POST">
                 @csrf
-                 <!-- Email Address -->
+                {{-- Email --}}
                 <div class="mb-3">
                   <label for="email" class="form-label">Email </label>
                   <input
@@ -47,33 +49,43 @@
                     class="form-control"
                     id="email"
                     name="email"
-                    placeholder="Enter your email "
-                    autofocus  :value="old('email')"/>
+                    placeholder="Enter your email"
+                    autofocus :value="old('email')"/>
+                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
                 </div>
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                <!-- Password -->
-                <div class="mb-3 form-password-toggle">
-                  <div class="d-flex justify-content-between">
-                    <label class="form-label" for="password">Password</label>
-                    <a href="auth-forgot-password-basic.html">
-                      <small>Forgot Password?</small>
-                    </a>
-                  </div>
-                  <x-input-error :messages="$errors->get('password')" class="mt-2" />
 
-                    
-                  <div class="input-group input-group-merge">
-                    <input
-                      type="password"
-                      id="password"
-                      class="form-control"
-                      name="password"
-                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                      aria-describedby="password"
-                    />
-                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                {{-- Password --}}
+                <div class="mb-3 form-password-toggle">
+                    <label class="form-label" for="password">Password</label>
+                    <div class="input-group input-group-merge">
+                      <input
+                        type="password"
+                        id="password"
+                        class="form-control"
+                        name="password"
+                        placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                        aria-describedby="password"
+                      />
+                      <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                    </div>
+                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
                   </div>
-                </div>
+                      {{-- Confirm Password --}}
+                      <div class="mb-3 form-password-toggle">
+                        <label class="form-label" for="password">Password_Confirmation</label>
+                        <div class="input-group input-group-merge">
+                          <input
+                            type="password"
+                            id="password"
+                            class="form-control"
+                            name="password_confirmation"
+                            placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                            aria-describedby="password"
+                          />
+                          <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                        </div>
+                        <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                      </div>
                 <div class="mb-3">
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="remember-me" />
@@ -84,10 +96,9 @@
                   <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
                 </div>
               </form>
-
               <p class="text-center">
                 <span>New on our platform?</span>
-                <a href="auth-register-basic.html">
+                <a href="{{ route('register') }}">
                   <span>Create an account</span>
                 </a>
               </p>
