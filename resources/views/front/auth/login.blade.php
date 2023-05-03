@@ -18,7 +18,7 @@
                         <!-- Logo -->
                         @include('front.partials.authLogo')
                         <!-- /Logo -->
-                        <h4 class="mb-2">RLogin 🔒</h4>
+                        <h4 class="mb-2">Welcome to Front Login! 👋</h4>
                         <p class="mb-4">Please sign-in to your account and start the adventure</p>
                         <!-- Session Status -->
                         <x-auth-session-status class="mb-4" :status="session('status')" />
