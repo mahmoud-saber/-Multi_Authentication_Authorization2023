@@ -30,8 +30,8 @@ require __DIR__.'/auth.php';
 // ///////////////////////////////////////////
 // back design
 Route::prefix('back')->name('back.')->group(function(){
-    Route::get('/',BackHomeController::class)->name('index');
-    // middleware(['auth','verified'])->
+    Route::get('/',BackHomeController::class)->middleware(['admin'])->name('index');
+
      Route::view('/login','back.auth.login');
      Route::view('/register','back.auth.register');
      Route::view('/forget-password','back.auth.forgot-password');
