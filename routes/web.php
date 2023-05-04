@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\Front\FrontHomeController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Back\BackHomeController;
+use App\Http\Controllers\Front\FrontHomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,12 +24,18 @@ Route::prefix('front')->name('front.')->group(function(){
      Route::view('/forget-password','front.auth.forgot-password');
 });
 
-
-
-
-
 require __DIR__.'/auth.php';
 
+
+// ///////////////////////////////////////////
+// back design
+Route::prefix('back')->name('back.')->group(function(){
+    Route::get('/',BackHomeController::class)->name('index');
+    // middleware(['auth','verified'])->
+     Route::view('/login','back.auth.login');
+     Route::view('/register','back.auth.register');
+     Route::view('/forget-password','back.auth.forgot-password');
+});
 
 
 Route::get('/', function () {
