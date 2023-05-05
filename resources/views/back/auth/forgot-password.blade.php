@@ -42,6 +42,8 @@
                     autofocus
                     :value="old('email')"
                   />
+                  <x-input-error :messages="$errors->get('email')" class="mt-2" />
+
                 </div>
                 <button class="btn btn-primary d-grid w-100">Send Reset Link</button>
               </form>
