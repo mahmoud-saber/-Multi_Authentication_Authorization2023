@@ -28,7 +28,7 @@ require __DIR__ . '/auth.php';
 // ///////////////////////////////////////////
 // back design
 Route::prefix('back')->name('back.')->group(function () {
-    Route::get('/', BackHomeController::class)->middleware(['admin'])->name('index');
+    Route::get('/', BackHomeController::class)->middleware('admin')->name('index');
 
 
     require __DIR__ . '/adminauth.php';

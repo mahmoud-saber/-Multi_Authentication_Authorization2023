@@ -17,15 +17,15 @@ class VerifyEmailController extends Controller
     {
         if ($request->user()->hasVerifiedEmail()) {
             // return redirect()->intended(RouteServiceProvider::HOME.'?verified=1');
-        return to_route('front.index','?verified=1');
+        return to_route('back.index','?verified=1');
 
         }
 
         if ($request->user()->markEmailAsVerified()) {
-            event(new Verified($request->user()));
+            event(new Verified($request->guard('admin')));
         }
 
         // return redirect()->intended(RouteServiceProvider::HOME.'?verified=1');
-        return to_route('front.index','?verified=1');
+        return to_route('back.index','?verified=1');
     }
 }
