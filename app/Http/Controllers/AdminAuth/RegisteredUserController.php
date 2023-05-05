@@ -34,19 +34,19 @@ class RegisteredUserController extends Controller
 
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.Admin::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $admin = Admin::create([
+        $user = Admin::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
-        event(new Registered($admin));
+        event(new Registered($user));
 
-        Auth::guard('admin')->login($admin);
+        Auth::guard('admin')->login($user);
 
         // return redirect(RouteServiceProvider::HOME);
         return to_route('back.index');
