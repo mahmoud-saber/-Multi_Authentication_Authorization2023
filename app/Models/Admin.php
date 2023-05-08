@@ -10,8 +10,9 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Notifications\AdminPasswordNotification;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use PHPUnit\Framework\MockObject\Verifiable;
 
-class Admin extends Authenticatable
+class Admin extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable ,HasRoles;
 
