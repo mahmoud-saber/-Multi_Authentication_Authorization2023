@@ -1,6 +1,8 @@
 @extends('back.master')
 @section('title', __('lang.roles'))
 @section('roles_active', 'active bg-light')
+@includeIf("$directory.pushStyles")
+
 @section('content')
     <!-- page title -->
     <div class="row">
@@ -9,11 +11,11 @@
                 <h2 class="h5 page-title">{{ __('lang.roles') }}</h2>
 
                 <div class="page-title-right">
-                    @if (permission(['add_roles']))
+                    {{-- @if (permission(['add_roles'])) --}}
                     <a href="{{ route('back.roles.create') }}" class="btn btn-primary">
                         {{ __('lang.add_new') }}
                     </a>
-                    @endif
+                    {{-- @endif --}}
                 </div>
             </div>
         </div>
@@ -35,10 +37,11 @@
                     </thead>
 
                     <tbody>
-
+                        @if (count($data['data']) > 0)
+                            @foreach ($data['data'] as $key => $item)
                                 <tr>
-                                    <td>1</td>
-                                    <td>mahmoud</td>
+                                    <td>{{ $data['data']->firstItem() + $loop->index }}</td>
+                                    <td>{{ $item->name }}</td>
                                     <td>
                                         <div class="btn-group">
                                             <button class="btn btn-primary dropdown-toggle btn-sm" type="button"
@@ -46,16 +49,15 @@
                                                 {{ __('lang.actions') }} <i class="mdi mdi-chevron-down"></i>
                                             </button>
                                             <div class="dropdown-menu">
-                                                {{-- {{ route('back.roles.show', ['role' => $item]) }} --}}
-                                                <a href=""
+
+                                                <a href="{{ route('back.roles.show', ['role' => $item]) }}"
                                                     class="dropdown-item">
                                                     <span class="bx bx-show-alt"></span>
                                                     {{ __('lang.show') }}
                                                 </a>
 
                                                 {{-- @if (permission(['edit_roles'])) --}}
-                                                {{-- {{ route('back.roles.edit', ['role' => $item]) }} --}}
-                                                <a href=""
+                                                <a href="{{ route('back.roles.edit', ['role' => $item]) }}"
                                                     class="dropdown-item">
                                                     <span class="bx bx-edit-alt"></span>
                                                     {{ __('lang.edit') }}
@@ -63,9 +65,8 @@
                                                 {{-- @endif --}}
 
                                                 {{-- @if (permission(['delete_roles'])) --}}
-                                                {{-- {{ route('back.roles.destroy', ['role' => $item]) }} --}}
                                                 <a class="dropdown-item deleteClass"
-                                                    href=""
+                                                    href="{{ route('back.roles.destroy', ['role' => $item]) }}"
                                                     data-title="{{ __('lang.delete_role') }}" data-bs-toggle="modal"
                                                     data-bs-target="#deleteModal">
                                                     <span class="bx bx-trash-alt"></span>
@@ -77,15 +78,19 @@
                                         </div>
                                     </td>
                                 </tr>
-
+                            @endforeach
+                        @else
+                            <x-empty-alert></x-empty-alert>
+                        @endif
                     </tbody>
                 </table>
             </div>
 
-            {{-- {{ $data['data']->appends(request()->query())->render('pagination::bootstrap-4') }} --}}
+            {{ $data['data']->appends(request()->query())->render('pagination::bootstrap-4') }}
 
         </div>
     </div>
 @endsection
 
-@include("back.roles.scripts")
+@includeIf("$directory.scripts")
+@includeIf("$directory.pushScripts")

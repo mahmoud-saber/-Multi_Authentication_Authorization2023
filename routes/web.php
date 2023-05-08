@@ -29,7 +29,7 @@ require __DIR__ . '/auth.php';
 // ///////////////////////////////////////////
 // back design
 Route::prefix('back')->name('back.')->group(function () {
-    Route::get('/', BackHomeController::class)->middleware(['admin', 'verified'])->name('index');
+    Route::get('/', BackHomeController::class)->middleware(['admin'])->name('index');
     // middleware('admin')->
     // ---------------------------------------------------Role
     Route::controller(RoleController::class)->group(function(){

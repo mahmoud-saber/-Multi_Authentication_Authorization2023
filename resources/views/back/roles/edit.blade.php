@@ -15,8 +15,8 @@
 
     <div class="card">
         <div class="card-body">
-            {{-- {{ route('back.roles.update', ['role' => $role]) }} --}}
-            <form action="" method="post" id="edit_form"
+
+            <form action="{{ route('back.roles.update', ['role' => $role]) }}" method="post" id="edit_form"
                 enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
