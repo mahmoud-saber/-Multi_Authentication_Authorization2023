@@ -5,9 +5,9 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="modal-title"></h5>
             </div>
-            {{-- <div id="loading" class="mt-2">
-                @include('dashboard.modals.spinner')
-            </div> --}}
+            <div id="loading" class="mt-2">
+                @include('back.modals.spinner')
+            </div>
             <div class="modal-body" id="modal-body"></div>
         </div>
     </div>

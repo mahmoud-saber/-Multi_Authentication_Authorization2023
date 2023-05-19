@@ -4,9 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RoleRequest extends FormRequest
+class UpdateAdminRequest extends FormRequest
 {
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -24,10 +23,12 @@ class RoleRequest extends FormRequest
      */
     public function rules()
     {
-        $id = $this->route()->role->id ?? null;
+        $id = $this->route()->admin->id ?? null;
         return [
-            'name' => 'required|string|unique:roles,name,'.$id,
-            'permissionArray.*' => 'nullable',
+            'name'     => 'required|string',
+            'email'    => 'required|email|unique:admins,email,'.$id,
+            'password' => 'nullable|min:5|confirmed',
+            'role'     => 'nullable',
         ];
     }
 
@@ -39,8 +40,10 @@ class RoleRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name'            => __('lang.name'),
-            'permissionArray' => __('lang.permissions'),
+            'name'     => __('lang.name'),
+            'email'    => __('lang.email'),
+            'password' => __('lang.password'),
+            'role'     => __('lang.role'),
         ];
     }
 }

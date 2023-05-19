@@ -14,7 +14,7 @@
                     data-dismiss="modal">{{ __('lang.close') }}</button>
                 <button type="button" href="#" class="btn btn-danger" id="submit_delete">
                     {{ __('lang.delete') }}
-                    {{-- @include('dashboard.modals.spinner') --}}
+                    @include('back.modals.spinner')
                 </button>
             </div>
         </div>

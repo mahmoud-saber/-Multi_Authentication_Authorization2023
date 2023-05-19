@@ -1,10 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admins\AdminsController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Back\BackHomeController;
+ use App\Http\Controllers\Back\BackHomeController;
+use App\Http\Controllers\Roles\RolesController;
 use App\Http\Controllers\Front\FrontHomeController;
-use App\Http\Controllers\Role\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,10 +32,13 @@ Route::prefix('back')->name('back.')->group(function () {
     Route::get('/', BackHomeController::class)->middleware(['admin'])->name('index');
     // middleware('admin')->
     // ---------------------------------------------------Role
-    Route::controller(RoleController::class)->group(function(){
-        Route::resource('roles',RoleController::class);
+    Route::controller(RolesController::class)->group(function(){
+        Route::resource('roles',RolesController::class);
     });
-
+// ---------------------------------------------------------------------Admins
+Route::controller(AdminsController::class)->group(function(){
+    Route::resource('admins',AdminsController::class);
+});
     require __DIR__ . '/adminauth.php';
 });
 

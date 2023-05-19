@@ -76,8 +76,8 @@
 
         <!-- Admins -->
         <li class="menu-item @yield('admins_active')">
-            <a href="" class="menu-link">
-                {{-- {{ route('back.admins.index') }} --}}
+                <a href=" {{ route('back.admins.index') }}
+                " class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Admins</div>
             </a>
