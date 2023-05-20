@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
  use App\Http\Controllers\Back\BackHomeController;
 use App\Http\Controllers\Roles\RolesController;
 use App\Http\Controllers\Front\FrontHomeController;
+use App\Http\Controllers\User\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,10 @@ Route::prefix('back')->name('back.')->group(function () {
 // ---------------------------------------------------------------------Admins
 Route::controller(AdminsController::class)->group(function(){
     Route::resource('admins',AdminsController::class);
+});
+// ---------------------------------------------------------------------Users
+Route::controller(UserController::class)->group(function(){
+    Route::resource('users', UserController::class);
 });
     require __DIR__ . '/adminauth.php';
 });

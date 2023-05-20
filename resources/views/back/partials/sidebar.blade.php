@@ -93,8 +93,8 @@
 
         <!-- USERS -->
         <li class="menu-item @yield('users_active')">
-            <a href="" class="menu-link">
-                {{-- {{ route('back.users.index') }} --}}
+            <a href=" {{ route('back.users.index') }}" class="menu-link">
+
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Users</div>
             </a>

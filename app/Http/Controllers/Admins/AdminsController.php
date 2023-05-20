@@ -22,8 +22,7 @@ class AdminsController extends Controller
 
     function __construct()
     {
-        // $this->middleware('check_permission:list_admins')->only(['index', 'getData']);
-        // $this->middleware('check_permission:add_admins')->only(['create', 'store']);
+        //  $this->middleware('check_permission:add_admins')->only(['create', 'store']);
         // $this->middleware('check_permission:show_admins')->only(['show']);
         // $this->middleware('check_permission:edit_admins')->only(['edit', 'update']);
         // $this->middleware('check_permission:delete_admins')->only(['destroy']);
@@ -115,7 +114,7 @@ class AdminsController extends Controller
      */
     public function edit(Admin $admin)
     {
-        $roles = Role::where('guard_name', 'admin')->get();
+        $admin = Role::where('guard_name', 'admin')->get();
         if (!$admin->super_admin) return view(self::DIRECTORY . ".edit", \get_defined_vars());
     }
 
